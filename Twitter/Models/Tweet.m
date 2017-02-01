@@ -18,7 +18,10 @@
         self.author = [[User alloc] initWithDictionary:dictionary[@"user"]];
         self.text = dictionary[@"text"];
         
-        self.retweeted = [dictionary[@"retweeted"] boolValue];
+        if (dictionary[@"retweeted_status"] != nil) {
+            self.retweeted = [[Tweet alloc] initWithDictionary:dictionary[@"retweeted_status"]];
+        }
+        
         self.retweetCount = [dictionary[@"retweet_count"] integerValue];
         
         // format date

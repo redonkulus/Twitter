@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) User *author;
 
-@property (nonatomic) Boolean *retweeted;
+@property (nonatomic, strong) Tweet *retweeted;
 @property (nonatomic) NSInteger *retweetCount;
 
 

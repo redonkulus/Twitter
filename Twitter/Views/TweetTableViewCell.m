@@ -39,29 +39,34 @@
 
 - (void)reloadData
 {
-    NSLog(@"reload data");
+    // store model in var to avoid re-setting of model
+    Tweet *model = self.model;
     
-    self.nameLabel.text = self.model.author.name;
-    self.handleLabel.text = self.model.author.screenname;
-    self.timestampLabel.text = [self.model getRelativeTimestamp];
-    self.contentLabel.text = self.model.text;
-    
-    // check container height
-    self.retweetContainerHeightConstant.constant = self.model.retweeted ? 24 : 0;
+    // handle retweet use case
+    if (self.model.retweeted != nil) {
+        self.retweetContainerHeightConstant.constant = 24;
+        self.retweetedLabel.text = [model.author.name stringByAppendingString:@" Retweeted"];
+        model = self.model.retweeted;
+    } else {
+        self.retweetContainerHeightConstant.constant = 0;
+    }
     [self setNeedsUpdateConstraints];
     
-    [self showProfileImage];
-
-    [self setNeedsLayout];
+    self.nameLabel.text = model.author.name;
+    self.handleLabel.text = model.author.screenname;
+    self.timestampLabel.text = [self.model getRelativeTimestamp];
+    self.contentLabel.text = model.text;
+    
+    [self showProfileImage:model];
 }
 
-- (void)showProfileImage
+- (void)showProfileImage:(Tweet *)model
 {
     // Establish the weak self reference
     __weak typeof(self) weakSelf = self;
     
     // load profile image and fade to view
-    NSURL *profileImage = [NSURL URLWithString:self.model.author.profileImageUrl];
+    NSURL *profileImage = [NSURL URLWithString:model.author.profileImageUrl];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:profileImage];
     [self.imageView setImageWithURLRequest:request placeholderImage:nil
        success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
@@ -81,7 +86,6 @@
 
 - (void)setModel:(Tweet *)model
 {
-    NSLog(@"view cell - set model");
     _model = model;
     [self reloadData];
 }
