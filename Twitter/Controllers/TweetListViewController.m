@@ -6,12 +6,16 @@
 //  Copyright © 2017 Seth Bertalotto. All rights reserved.
 //
 
+#import "TwitterClient.h"
 #import "TweetListViewController.h"
 #import "TweetTableViewCell.h"
+#import "LoginViewController.h"
+#import "Tweet.h"
 
 @interface TweetListViewController () <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *tweets;
 
 @end
 
@@ -26,6 +30,8 @@
     
     UINib *nib = [UINib nibWithNibName:@"TweetTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"TweetTableViewCell"];
+    
+    [self loadTweets];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,21 +41,26 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.tweets.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell" forIndexPath:indexPath];
     
-    if (indexPath.row % 2) {
-        cell.retweetContainerHeightConstant.constant = 0;
-    } else {
-        cell.retweetContainerHeightConstant.constant = 24;
-    }
-    [cell setNeedsUpdateConstraints];
+    Tweet *model = [self.tweets objectAtIndex:indexPath.item];
+    
+    cell.model = model;
     
     return cell;
+}
+
+- (void) loadTweets
+{
+    [[TwitterClient sharedInstance] fetchHomeTimeline:^(NSArray *tweets, NSError *error) {
+        self.tweets = tweets;
+        [self.tableView reloadData];
+    }];
 }
 
 @end

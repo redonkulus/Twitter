@@ -7,6 +7,7 @@
 //
 
 #import "TwitterClient.h"
+#import "Tweet.h"
 
 NSString * const kTwitterConsumerKey = @"E9IemXo95JImu3JKFAuz7E78D";
 NSString * const kTwitterConsumerSecret = @"mxyQa9VQqkarxQljxxnsqpLENAQ6KqY9eRdi9EfF0aR1hj7P86";
@@ -88,17 +89,16 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     }];
 }
 
-//        [[TwitterClient sharedInstance] GET:@"1.1/statuses/home_timeline.json" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//            // NSLog(@"current user %@", responseObject);
-//
-//            //
-//            NSArray *tweets = [Tweet tweetsWithArray:responseObject];
-//            for (Tweet *tweet in tweets) {
-//                NSLog(@"tweet: %@, created: %@", tweet.text, tweet.createdAt);
-//            }
-//
-//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//            NSLog(@"failed to receive user %@", error);
-//        }];
+- (void)fetchHomeTimeline:(TweetListCallback)callback
+{
+    [self GET:@"1.1/statuses/home_timeline.json?include_my_retweet=1" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"timeline response %@", responseObject);
+        NSArray *tweets = [Tweet tweetsWithArray:responseObject];
+        callback(tweets, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failed to receive user %@", error);
+        callback(nil, error);
+    }];
+}
 
 @end

@@ -21,16 +21,26 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    UIViewController *viewController;
+
+    // check if authenticated
+    if ([[TwitterClient sharedInstance] isAuthorized]) {
+        viewController = [[TweetListViewController alloc] init];
+    } else {
+        viewController = [[LoginViewController alloc] init];
+    }
     
-    //TweetListViewController *viewController = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
+    // wrap view with navigation controller
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
+    // display nav
+    //[self presentViewController:navController animated:NO completion:nil];
+
     // add window
     CGRect frame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:frame];
     
-    self.window.rootViewController = [[LoginViewController alloc] init];
-    //self.window.rootViewController = viewController;
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     
     return YES;
