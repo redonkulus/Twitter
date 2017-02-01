@@ -33,15 +33,15 @@
 		59A3224E1E3FB65900B86619 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59A322511E3FB65900B86619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59A322531E3FB65900B86619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		59A322591E3FB9CC00B86619 /* TweetListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetListViewController.h; path = TweetListViewController.h; sourceTree = "<group>"; };
-		59A3225A1E3FB9CC00B86619 /* TweetListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetListViewController.m; path = TweetListViewController.m; sourceTree = "<group>"; };
-		59A3225B1E3FB9CC00B86619 /* TweetListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetListViewController.xib; path = TweetListViewController.xib; sourceTree = "<group>"; };
-		59A3225E1E3FC83400B86619 /* TweetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetTableViewCell.h; path = TweetTableViewCell.h; sourceTree = "<group>"; };
-		59A3225F1E3FC83400B86619 /* TweetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetTableViewCell.m; path = TweetTableViewCell.m; sourceTree = "<group>"; };
-		59A322601E3FC83400B86619 /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetTableViewCell.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
-		59A322631E3FF5B800B86619 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		59A322641E3FF5B800B86619 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = LoginViewController.m; sourceTree = "<group>"; };
-		59A322651E3FF5B800B86619 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		59A322591E3FB9CC00B86619 /* TweetListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetListViewController.h; sourceTree = "<group>"; };
+		59A3225A1E3FB9CC00B86619 /* TweetListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetListViewController.m; sourceTree = "<group>"; };
+		59A3225B1E3FB9CC00B86619 /* TweetListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetListViewController.xib; sourceTree = "<group>"; };
+		59A3225E1E3FC83400B86619 /* TweetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetTableViewCell.h; sourceTree = "<group>"; };
+		59A3225F1E3FC83400B86619 /* TweetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetTableViewCell.m; sourceTree = "<group>"; };
+		59A322601E3FC83400B86619 /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
+		59A322631E3FF5B800B86619 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		59A322641E3FF5B800B86619 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		59A322651E3FF5B800B86619 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		59A322681E3FF7A200B86619 /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClient.h; sourceTree = "<group>"; };
 		59A322691E3FF7A200B86619 /* TwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClient.m; sourceTree = "<group>"; };
 		59A3226C1E40060100B86619 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -111,7 +111,6 @@
 				59A322501E3FB65900B86619 /* LaunchScreen.storyboard */,
 				59A322431E3FB65900B86619 /* main.m */,
 			);
-			name = "Supporting Files";
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
@@ -123,7 +122,6 @@
 				59A3226F1E40060E00B86619 /* User.h */,
 				59A322701E40060E00B86619 /* User.m */,
 			);
-			name = Models;
 			path = Models;
 			sourceTree = "<group>";
 		};
@@ -133,7 +131,6 @@
 				59A322681E3FF7A200B86619 /* TwitterClient.h */,
 				59A322691E3FF7A200B86619 /* TwitterClient.m */,
 			);
-			name = Libs;
 			path = Libs;
 			sourceTree = "<group>";
 		};
@@ -147,7 +144,6 @@
 				59A3225A1E3FB9CC00B86619 /* TweetListViewController.m */,
 				59A3225B1E3FB9CC00B86619 /* TweetListViewController.xib */,
 			);
-			name = Controllers;
 			path = Controllers;
 			sourceTree = "<group>";
 		};
@@ -158,7 +154,6 @@
 				59A3225F1E3FC83400B86619 /* TweetTableViewCell.m */,
 				59A322601E3FC83400B86619 /* TweetTableViewCell.xib */,
 			);
-			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};

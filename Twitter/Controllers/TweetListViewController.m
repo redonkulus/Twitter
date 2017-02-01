@@ -14,6 +14,8 @@
 
 @interface TweetListViewController () <UITableViewDataSource>
 
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *tweets;
 
@@ -30,6 +32,11 @@
     
     UINib *nib = [UINib nibWithNibName:@"TweetTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"TweetTableViewCell"];
+    
+    // setup pull to refresh
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     [self loadTweets];
 }
@@ -59,6 +66,7 @@
 {
     [[TwitterClient sharedInstance] fetchHomeTimeline:^(NSArray *tweets, NSError *error) {
         self.tweets = tweets;
+        [self.refreshControl endRefreshing];
         [self.tableView reloadData];
     }];
 }
