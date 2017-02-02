@@ -7,11 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginViewController.h"
-#import "TweetListViewController.h"
+#import "NavigationManager.h"
 #import "TwitterClient.h"
-#import "User.h"
-#import "Tweet.h"
 
 @interface AppDelegate ()
 
@@ -21,27 +18,33 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    UIViewController *viewController;
-
-    // check if authenticated
-    if ([[TwitterClient sharedInstance] isAuthorized]) {
-        viewController = [[TweetListViewController alloc] init];
-    } else {
-        viewController = [[LoginViewController alloc] init];
-    }
-    
-    // wrap view with navigation controller
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
-    // display nav
-    //[self presentViewController:navController animated:NO completion:nil];
-
-    // add window
-    CGRect frame = [UIScreen mainScreen].bounds;
-    self.window = [[UIWindow alloc] initWithFrame:frame];
-    
-    self.window.rootViewController = navController;
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = [[NavigationManager shared] rootViewController];
     [self.window makeKeyAndVisible];
+    
+//    UIViewController *viewController;
+
+//    // check if authenticated
+//    if ([[TwitterClient sharedInstance] isAuthorized]) {
+//        viewController = [[TweetListViewController alloc] init];
+//        viewController.title = @"Home";
+//    } else {
+//        viewController = [[LoginViewController alloc] init];
+//        viewController.title = @"Login";
+//    }
+//    
+//    // wrap view with navigation controller
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+//    
+//    // display nav
+//    //[self presentViewController:navController animated:NO completion:nil];
+//
+//    // add window
+//    CGRect frame = [UIScreen mainScreen].bounds;
+//    self.window = [[UIWindow alloc] initWithFrame:frame];
+//    
+//    self.window.rootViewController = navController;
+//    [self.window makeKeyAndVisible];
     
     return YES;
 }
