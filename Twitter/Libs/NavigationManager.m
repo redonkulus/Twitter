@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UINavigationController *homeNavController;
+@property (nonatomic, strong) UINavigationController *mentionsNavController;
 @property (nonatomic, strong) UINavigationController *profileNavController;
 @property (nonatomic, strong) UITabBarController *tabController;
 
@@ -71,13 +72,14 @@
 - (UIViewController *)loggedInVC
 {
     self.homeNavController = [self.class createTabVC:@"home-icon.png" label:@"Home" type:TweetsViewTypeHome];
+    self.mentionsNavController = [self.class createTabVC:@"notification-icon.png" label:@"Mentions" type:TweetsViewTypeMentions];
     self.profileNavController = [self.class createTabVC:@"profile-icon.png" label:@"Me" type:TweetsViewTypeProfile];
     
     // create tab bar view controller
     self.tabController = [[UITabBarController alloc] init];
     
     // Add navigation controller to tab bar controller
-    self.tabController.viewControllers = @[self.homeNavController, self.profileNavController];
+    self.tabController.viewControllers = @[self.homeNavController, self.mentionsNavController, self.profileNavController];
     
     return self.tabController;
 }

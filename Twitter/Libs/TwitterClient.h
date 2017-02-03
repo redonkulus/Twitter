@@ -20,6 +20,7 @@ typedef void (^TweetListCallback)(NSArray * tweets, NSError * error);
 - (void) loginWithCompletion:(void (^)(User * user, NSError * error))completion;
 - (void) openURL:(NSURL * _Nonnull)url;
 - (void) fetchHomeTimeline:(_Nonnull TweetListCallback)callback;
+- (void) fetchMentionsTimeline:(_Nonnull TweetListCallback)callback;
 - (void) fetchProfileTimeline:(nullable User *)user callback:(_Nonnull TweetListCallback)callback;
 
 @end

@@ -88,6 +88,14 @@
             }];
             break;
         }
+        case TweetsViewTypeMentions: {
+            [[TwitterClient sharedInstance] fetchMentionsTimeline:^(NSArray *tweets, NSError *error) {
+                self.tweets = tweets;
+                [self.refreshControl endRefreshing];
+                [self.tableView reloadData];
+            }];
+            break;
+        }
         case TweetsViewTypeProfile: {
             [[TwitterClient sharedInstance] fetchProfileTimeline:self.user callback:^(NSArray *tweets, NSError *error) {
                 self.tweets = tweets;
