@@ -9,6 +9,7 @@
 #import "TwitterClient.h"
 #import "TweetListViewController.h"
 #import "TweetTableViewCell.h"
+#import "ProfileTableViewCell.h"
 #import "Tweet.h"
 
 @interface TweetListViewController () <UITableViewDataSource>
@@ -32,6 +33,9 @@
     UINib *nib = [UINib nibWithNibName:@"TweetTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"TweetTableViewCell"];
     
+    UINib *pnib = [UINib nibWithNibName:@"ProfileTableViewCell" bundle:nil];
+    [self.tableView registerNib:pnib forCellReuseIdentifier:@"ProfileTableViewCell"];
+    
     // setup pull to refresh
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
@@ -47,27 +51,58 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.tweets.count;
+    if (self.user) {
+        return self.tweets.count + 1;
+    } else {
+        return self.tweets.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell" forIndexPath:indexPath];
+    NSInteger tweetIndex = indexPath.row;
+    if (self.user && tweetIndex > 0) {
+        tweetIndex--;
+    }
     
-    Tweet *model = [self.tweets objectAtIndex:indexPath.item];
-    
-    cell.model = model;
-    
-    return cell;
+    if (self.user && indexPath.row == 0) {
+        ProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileTableViewCell"];
+        cell.user = self.user;
+        return cell;
+    } else {
+        TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell"];
+        Tweet *model = [self.tweets objectAtIndex:tweetIndex];
+        cell.model = model;
+        return cell;
+    }
 }
 
 - (void) loadTweets
 {
-    [[TwitterClient sharedInstance] fetchHomeTimeline:^(NSArray *tweets, NSError *error) {
-        self.tweets = tweets;
-        [self.refreshControl endRefreshing];
-        [self.tableView reloadData];
-    }];
+    switch (self.tweetsViewType) {
+        case TweetsViewTypeHome: {
+            [[TwitterClient sharedInstance] fetchHomeTimeline:^(NSArray *tweets, NSError *error) {
+                self.tweets = tweets;
+                [self.refreshControl endRefreshing];
+                [self.tableView reloadData];
+            }];
+            break;
+        }
+        case TweetsViewTypeProfile: {
+            [[TwitterClient sharedInstance] fetchProfileTimeline:self.user callback:^(NSArray *tweets, NSError *error) {
+                self.tweets = tweets;
+                if (self.user == nil) {
+                    Tweet *tweet = tweets[0];
+                    self.user = tweet.author;
+                }
+                [self.refreshControl endRefreshing];
+                [self.tableView reloadData];
+            }];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end

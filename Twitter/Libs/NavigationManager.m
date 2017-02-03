@@ -10,7 +10,6 @@
 #import "TwitterClient.h"
 #import "LoginViewController.h"
 #import "TweetListViewController.h"
-#import "ProfileViewController.h"
 #import "User.h"
 
 @interface NavigationManager()
@@ -52,13 +51,12 @@
     return sharedInstance;
 }
 
-+ (UINavigationController *)createTabVC:(Class)className :(NSString *)icon :(NSString *)label
++ (UINavigationController *)createTabVC:(NSString *)icon label:(NSString *)label type:(TweetsViewType)type
 {
-    NSString *myClass = NSStringFromClass(className);
-
     // Create root VC for the tab's navigation controller
-    UIViewController *vc = [[className alloc] initWithNibName:myClass bundle:nil];
+    TweetListViewController *vc = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
     vc.title = label;
+    vc.tweetsViewType = type;
     
     // create tab item
     UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:label image:[UIImage imageNamed:icon] tag:0];
@@ -72,8 +70,8 @@
 
 - (UIViewController *)loggedInVC
 {
-    self.homeNavController = [self.class createTabVC:TweetListViewController.class :@"home-icon.png" :@"Home"];
-    self.profileNavController = [self.class createTabVC:ProfileViewController.class :@"profile-icon.png" :@"Me"];
+    self.homeNavController = [self.class createTabVC:@"home-icon.png" label:@"Home" type:TweetsViewTypeHome];
+    self.profileNavController = [self.class createTabVC:@"profile-icon.png" label:@"Me" type:TweetsViewTypeProfile];
     
     // create tab bar view controller
     self.tabController = [[UITabBarController alloc] init];
@@ -111,7 +109,8 @@
 
 - (void) showProfile:(nullable User *)user
 {
-    ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    TweetListViewController *vc = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
+    vc.tweetsViewType = TweetsViewTypeProfile;
     if (user != nil) {
         vc.user = user;
     }
