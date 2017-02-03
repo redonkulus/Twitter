@@ -20,4 +20,7 @@ typedef enum {
 @property (nonatomic) TweetsViewType tweetsViewType;
 @property (nonatomic, strong) User *user;
 
+- (void)compose:(id)sender;
+- (void)logOut:(id)sender;
+
 @end

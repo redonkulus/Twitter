@@ -72,7 +72,8 @@
     self.contentLabel.text = model.text;
     
     // set buttons
-    self.favoriteButton.titleLabel.text = [util getFormattedCount:model.favoriteCount];
+    [self.retweetButton setTitle:[util getFormattedCount:model.retweetCount] forState:UIControlStateNormal];
+    [self.favoriteButton setTitle:[util getFormattedCount:model.favoriteCount] forState:UIControlStateNormal];
     
     // set user
     self.user = model.author;

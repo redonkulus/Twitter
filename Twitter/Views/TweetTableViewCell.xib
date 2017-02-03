@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="447" height="24"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blah Retweeted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPT-EQ-DGP">
-                                <rect key="frame" x="61" y="5" width="88.5" height="14.5"/>
+                                <rect key="frame" x="61" y="5.5" width="88.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4k-lw-HeE" userLabel="Image Container">
-                        <rect key="frame" x="0.0" y="24" width="60" height="200.5"/>
+                        <rect key="frame" x="0.0" y="24" width="60" height="200"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6rh-gb-Klq">
                                 <rect key="frame" x="8" y="10" width="44" height="44"/>
@@ -65,7 +65,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bof-73-0ON" userLabel="Content Container">
-                        <rect key="frame" x="60" y="24" width="387" height="161"/>
+                        <rect key="frame" x="60" y="24" width="387" height="160"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49t-mj-bgg">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="32"/>
@@ -78,7 +78,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGn-dq-WrT">
-                                <rect key="frame" x="48" y="0.5" width="40" height="32"/>
+                                <rect key="frame" x="48" y="0.0" width="40" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="hrd-Mz-pr8"/>
                                 </constraints>
@@ -87,7 +87,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeStamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0z-Hk-hB3">
-                                <rect key="frame" x="306.5" y="0.5" width="64.5" height="32"/>
+                                <rect key="frame" x="306.5" y="0.0" width="64.5" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="BT2-Wv-HyZ"/>
                                 </constraints>
@@ -96,7 +96,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet content" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzh-PH-hWW">
-                                <rect key="frame" x="0.0" y="27" width="371" height="133.5"/>
+                                <rect key="frame" x="0.0" y="27" width="371" height="133"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -120,7 +120,7 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="LOW-vw-Sy8">
-                        <rect key="frame" x="60" y="184.5" width="387" height="40"/>
+                        <rect key="frame" x="60" y="184" width="387" height="40"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bj3-GH-ty3">
                                 <rect key="frame" x="0.0" y="0.0" width="129" height="40"/>
@@ -132,6 +132,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWW-2q-9zV">
                                 <rect key="frame" x="129" y="0.0" width="129" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="retweet-icon">
                                     <color key="titleColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                 </state>
@@ -139,6 +140,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqz-jc-DF2">
                                 <rect key="frame" x="258" y="0.0" width="129" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="favor-icon">
                                     <color key="titleColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                 </state>

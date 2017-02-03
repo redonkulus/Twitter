@@ -106,10 +106,12 @@
 
 - (void)logOut
 {
-    
+    [[TwitterClient sharedInstance] logout];
+    UIViewController *vc = [self loggedOutVC];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
-- (void) showProfile:(nullable User *)user
+- (void)showProfile:(nullable User *)user
 {
     TweetListViewController *vc = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
     vc.tweetsViewType = TweetsViewTypeProfile;

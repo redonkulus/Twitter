@@ -61,6 +61,10 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     
 }
 
+- (void)logout {
+    [self.requestSerializer removeAccessToken];
+}
+
 - (void) openURL:(NSURL *)url
 {
     // fetch access token after user authorizes
@@ -128,6 +132,32 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failed to receive user %@", error);
         callback(nil, error);
+    }];
+}
+
+- (void)createTweet:(Tweet * _Nonnull)tweet callback:(TweetCallback)callback
+{
+    NSString *urlString = [NSString stringWithFormat:@"1.1/statuses/update.json?status=%@", tweet.text];
+    
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    [self POST:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"status sent successfully %@", responseObject);
+        Tweet *newTweet = [[Tweet alloc] initWithDictionary:responseObject];
+        callback(newTweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failed to send status %@", error);
+        [self printRateLimit:@"statuses"];
+        callback(nil, error);
+    }];
+}
+
+- (void)printRateLimit:(NSString *) category
+{
+    [self GET:@"1.1/application/rate_limit_status.json" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject[@"resources"][category]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failed to get rate limit");
     }];
 }
 
