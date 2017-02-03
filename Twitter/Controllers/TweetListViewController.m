@@ -26,6 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (self.tweetsViewType == TweetsViewTypeHome) {
+        UIImage *image = [UIImage imageNamed:@"Twitter_Logo_Blue.png"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, 40, 40);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.navigationItem.titleView = imageView;
+    }
+    
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 200;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -40,6 +48,7 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
     
     [self loadTweets];
 }
