@@ -11,11 +11,14 @@
 #import "LoginViewController.h"
 #import "TweetListViewController.h"
 #import "ProfileViewController.h"
+#import "User.h"
 
 @interface NavigationManager()
 
-@property (nonatomic, assign) BOOL isLoggedIn;
 @property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UINavigationController *homeNavController;
+@property (nonatomic, strong) UINavigationController *profileNavController;
+@property (nonatomic, strong) UITabBarController *tabController;
 
 @end
 
@@ -25,8 +28,6 @@
 {
     self = [super init];
     if (self) {
-        self.isLoggedIn = NO;
-        
         UIViewController *root = [[TwitterClient sharedInstance] isAuthorized] ? [self loggedInVC] : [self loggedOutVC];
         
         self.navigationController = [[UINavigationController alloc] init];
@@ -71,16 +72,16 @@
 
 - (UIViewController *)loggedInVC
 {
-    UINavigationController *homeNavController = [self.class createTabVC:TweetListViewController.class :@"home-icon.png" :@"Home"];
-    UINavigationController *profileNavController = [self.class createTabVC:ProfileViewController.class :@"profile-icon.png" :@"Profile"];
+    self.homeNavController = [self.class createTabVC:TweetListViewController.class :@"home-icon.png" :@"Home"];
+    self.profileNavController = [self.class createTabVC:ProfileViewController.class :@"profile-icon.png" :@"Me"];
     
     // create tab bar view controller
-    UITabBarController *tabController = [[UITabBarController alloc] init];
+    self.tabController = [[UITabBarController alloc] init];
     
     // Add navigation controller to tab bar controller
-    tabController.viewControllers = @[homeNavController, profileNavController];
+    self.tabController.viewControllers = @[self.homeNavController, self.profileNavController];
     
-    return tabController;
+    return self.tabController;
 }
 
 - (UIViewController *)loggedOutVC
@@ -106,6 +107,26 @@
 - (void)logOut
 {
     
+}
+
+- (void) showProfile:(nullable User *)user
+{
+    ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    if (user != nil) {
+        vc.user = user;
+    }
+    
+    UINavigationController *selected = [self.tabController.viewControllers objectAtIndex:self.tabController.selectedIndex];
+    
+    // hide nav bar
+//    [selected.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    selected.navigationBar.shadowImage = [UIImage new];
+//    selected.navigationBar.translucent = YES;
+//    
+//    selected.navigationBar.tintColor = [UIColor whiteColor];
+//    selected.navigationBar.topItem.title = @"";
+    
+    [selected pushViewController:vc animated:YES];
 }
 
 @end

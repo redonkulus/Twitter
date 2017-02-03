@@ -76,6 +76,7 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
             
             User *user = [[User alloc] initWithDictionary:responseObject];
             NSLog(@"current user %@", user.name);
+            self.user = user;
             
             self.loginCompletion(user, nil);
             
@@ -92,6 +93,23 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
 - (void)fetchHomeTimeline:(TweetListCallback)callback
 {
     [self GET:@"1.1/statuses/home_timeline.json?include_my_retweet=1" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // NSLog(@"timeline response %@", responseObject);
+        NSArray *tweets = [Tweet tweetsWithArray:responseObject];
+        callback(tweets, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failed to receive user %@", error);
+        callback(nil, error);
+    }];
+}
+
+- (void)fetchProfileTimeline:(nullable User *)user callback:(TweetListCallback)callback
+{
+    NSString *urlString = @"1.1/statuses/user_timeline.json?include_rts=1&count=20&include_my_retweet=1";
+    if (user != nil) {
+        urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"&screen_name=%@", user.screenname]];
+    }
+
+    [self GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"timeline response %@", responseObject);
         NSArray *tweets = [Tweet tweetsWithArray:responseObject];
         callback(tweets, nil);

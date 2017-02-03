@@ -9,7 +9,6 @@
 #import "TwitterClient.h"
 #import "TweetListViewController.h"
 #import "TweetTableViewCell.h"
-#import "LoginViewController.h"
 #import "Tweet.h"
 
 @interface TweetListViewController () <UITableViewDataSource>

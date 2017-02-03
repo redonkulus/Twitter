@@ -23,6 +23,7 @@
         }
         
         self.retweetCount = [dictionary[@"retweet_count"] integerValue];
+        self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
         
         // format date
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

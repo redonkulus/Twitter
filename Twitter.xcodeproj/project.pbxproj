@@ -26,6 +26,7 @@
 		59A322A51E429D9A00B86619 /* NavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A322A41E429D9A00B86619 /* NavigationManager.m */; };
 		59A322A91E42B8E200B86619 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A322A71E42B8E200B86619 /* ProfileViewController.m */; };
 		59A322AA1E42B8E200B86619 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A322A81E42B8E200B86619 /* ProfileViewController.xib */; };
+		59A322AD1E43EDB300B86619 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A322AC1E43EDB300B86619 /* Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,8 @@
 		59A322A61E42B8E200B86619 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		59A322A71E42B8E200B86619 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		59A322A81E42B8E200B86619 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		59A322AB1E43EDB300B86619 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		59A322AC1E43EDB300B86619 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		C35691D38F4534896C119134 /* Pods-Twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +148,8 @@
 				59A322691E3FF7A200B86619 /* TwitterClient.m */,
 				59A322A31E429D9A00B86619 /* NavigationManager.h */,
 				59A322A41E429D9A00B86619 /* NavigationManager.m */,
+				59A322AB1E43EDB300B86619 /* Util.h */,
+				59A322AC1E43EDB300B86619 /* Util.m */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 				59A322A91E42B8E200B86619 /* ProfileViewController.m in Sources */,
 				59A3226A1E3FF7A200B86619 /* TwitterClient.m in Sources */,
 				59A322661E3FF5B800B86619 /* LoginViewController.m in Sources */,
+				59A322AD1E43EDB300B86619 /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

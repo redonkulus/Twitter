@@ -12,8 +12,12 @@
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *screenname;
-@property (nonatomic, strong) NSString *profileImageUrl;
 @property (nonatomic, strong) NSString *tagline;
+@property (nonatomic, strong) NSString *profileImageUrl;
+@property (nonatomic, strong) NSString *profileBackgroundUrl;
+@property (nonatomic, strong) NSString *profileBackgroundColor;
+@property (nonatomic) NSUInteger following;
+@property (nonatomic) NSUInteger followers;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

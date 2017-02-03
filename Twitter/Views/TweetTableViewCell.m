@@ -9,7 +9,10 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "NavigationManager.h"
 #import "TweetTableViewCell.h"
+#import "User.h"
+#import "Util.h"
 
 @interface TweetTableViewCell ()
 
@@ -20,9 +23,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
-@property (weak, nonatomic) IBOutlet UIButton *retweenButton;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UILabel *retweetedLabel;
+
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -30,20 +35,26 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    // add tap gesture recognizer to go to profile page
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageTap:)];
+    [self.profileImageView addGestureRecognizer:tap];
+    [self.profileImageView setUserInteractionEnabled:YES];
+    
+    // add rounded corners to profile image
+    self.profileImageView.layer.cornerRadius = 5;
+    self.profileImageView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // add rounded corners to profile image
-    self.profileImageView.layer.cornerRadius = 5;
-    self.profileImageView.clipsToBounds = YES;
 }
 
 - (void)reloadData
 {
     // store model in var to avoid re-setting of model
     Tweet *model = self.model;
+    Util *util = [[Util alloc] init];
     
     // handle retweet use case
     if (self.model.retweeted != nil) {
@@ -60,6 +71,12 @@
     self.timestampLabel.text = [self.model getRelativeTimestamp];
     self.contentLabel.text = model.text;
     
+    // set buttons
+    self.favoriteButton.titleLabel.text = [util getFormattedCount:model.favoriteCount];
+    
+    // set user
+    self.user = model.author;
+    
     [self showProfileImage:model];
 }
 
@@ -71,7 +88,7 @@
     // load profile image and fade to view
     NSURL *profileImage = [NSURL URLWithString:model.author.profileImageUrl];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:profileImage];
-    [self.imageView setImageWithURLRequest:request placeholderImage:nil
+    [self.profileImageView setImageWithURLRequest:request placeholderImage:nil
        success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
            weakSelf.profileImageView.contentMode = UIViewContentModeScaleAspectFit;
            
@@ -91,6 +108,11 @@
 {
     _model = model;
     [self reloadData];
+}
+
+- (IBAction)onImageTap:(UITapGestureRecognizer *)sender {
+    NSLog(@"image tapped");
+    [[NavigationManager shared] showProfile:self.user];
 }
 
 @end

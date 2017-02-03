@@ -21,31 +21,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[NavigationManager shared] rootViewController];
     [self.window makeKeyAndVisible];
-    
-//    UIViewController *viewController;
-
-//    // check if authenticated
-//    if ([[TwitterClient sharedInstance] isAuthorized]) {
-//        viewController = [[TweetListViewController alloc] init];
-//        viewController.title = @"Home";
-//    } else {
-//        viewController = [[LoginViewController alloc] init];
-//        viewController.title = @"Login";
-//    }
-//    
-//    // wrap view with navigation controller
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    
-//    // display nav
-//    //[self presentViewController:navController animated:NO completion:nil];
-//
-//    // add window
-//    CGRect frame = [UIScreen mainScreen].bounds;
-//    self.window = [[UIWindow alloc] initWithFrame:frame];
-//    
-//    self.window.rootViewController = navController;
-//    [self.window makeKeyAndVisible];
-    
     return YES;
 }
 

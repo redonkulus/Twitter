@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface NavigationManager : NSObject
 
@@ -17,5 +18,6 @@
 
 - (void)logIn;
 - (void)logOut;
+- (void)showProfile:(nullable User *)user;
 
 @end

@@ -13,6 +13,4 @@
 
 @property (strong, nonatomic) Tweet *model;
 
-//- (void) setRetweet;
-
 @end
