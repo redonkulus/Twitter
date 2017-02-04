@@ -119,11 +119,13 @@
     if (self.tweetsViewType == TweetsViewTypeProfile && indexPath.row == 0) {
         ProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileTableViewCell"];
         cell.user = self.user;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     } else {
         TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell"];
         Tweet *model = [self.tweets objectAtIndex:tweetIndex];
         cell.model = model;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
