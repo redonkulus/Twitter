@@ -39,6 +39,8 @@
     NSURL *profileImage = [NSURL URLWithString:self.user.profileImageUrl];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:profileImage];
     self.profileImageView.image = [UIImage imageWithData:imageData];
+    
+    [self updateTweetCount];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +49,24 @@
 
 - (IBAction)onCloseTap:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [self updateTweetCount];
+}
+
+- (void)updateTweetCount {
+    int remaining = 140 - (int)self.tweetTextView.text.length;
+    
+    self.tweetCount.text = [NSString stringWithFormat:@"%d", remaining];
+    
+    if (remaining <= 0) {
+        self.tweetCount.textColor = [UIColor redColor];
+        self.tweetButton.enabled = NO;
+    } else {
+        self.tweetCount.textColor = [UIColor lightGrayColor];
+        self.tweetButton.enabled = YES;
+    }
 }
 
 - (IBAction)onSubmit:(UIButton *)sender {
