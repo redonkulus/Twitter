@@ -6,10 +6,11 @@
 //  Copyright © 2017 Seth Bertalotto. All rights reserved.
 //
 
-#import "NavigationManager.h"
-#import "TwitterClient.h"
 #import "LoginViewController.h"
+#import "NavigationManager.h"
+#import "TweetDetailViewController.h"
 #import "TweetListViewController.h"
+#import "TwitterClient.h"
 #import "User.h"
 
 @interface NavigationManager()
@@ -129,6 +130,14 @@
 //    selected.navigationBar.tintColor = [UIColor whiteColor];
 //    selected.navigationBar.topItem.title = @"";
     
+    [selected pushViewController:vc animated:YES];
+}
+
+- (void)showTweet:(Tweet *)tweet
+{
+    TweetDetailViewController *vc = [[TweetDetailViewController alloc] initWithNibName:@"TweetDetailViewController" bundle:nil];
+    vc.tweet = tweet;
+    UINavigationController *selected = [self.tabController.viewControllers objectAtIndex:self.tabController.selectedIndex];
     [selected pushViewController:vc animated:YES];
 }
 

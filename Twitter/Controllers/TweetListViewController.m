@@ -11,6 +11,7 @@
 #import "ProfileTableViewCell.h"
 #import "TwitterClient.h"
 #import "Tweet.h"
+#import "TweetDetailViewController.h"
 #import "TweetListViewController.h"
 #import "TweetTableViewCell.h"
 
@@ -95,6 +96,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Tweet *tweet = [self.tweets objectAtIndex:indexPath.row];
+    [[NavigationManager shared] showTweet:tweet];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
